@@ -28,7 +28,7 @@ class MyHomePage extends StatelessWidget {
     ),
   ];
 
-  final String titleText = 'Flutter App';
+  final String titleText = 'Expenses calculator';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,13 +58,34 @@ class MyHomePage extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     Container(
-                      child: Text(tx.amount.toString()),
+                      margin:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                      padding: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                        color: Colors.green,
+                        width: 2,
+                      )),
+                      child: Text(
+                        tx.amount.toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 21,
+                            color: Colors.blue),
+                      ),
                     ),
-                    Column(children: <Widget>[
-                      Text(tx.title),
-                      Text(tx.date.toString()),
-
-                    ],),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          tx.title,
+                          style: TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.bold),
+                        ),
+                        Text(tx.date.toString(),
+                        style: TextStyle(color: Colors.orange),),
+                      ],
+                    ),
                   ],
                 ),
               );
