@@ -46,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       _userTransaction.add(newTx);
+     // _userTransaction.jumpToPage(_userTransaction - 1);
     });
   }
 
@@ -73,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: SingleChildScrollView(
+        //reverse: true,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,

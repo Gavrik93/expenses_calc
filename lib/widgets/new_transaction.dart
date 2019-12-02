@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+class NewTransaction extends StatefulWidget {
   final Function addTx;
+
+  NewTransaction(this.addTx);
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
 
   void submitData() {
     //extract data
@@ -12,13 +21,13 @@ class NewTransaction extends StatelessWidget {
     if (enteredData.isEmpty || enteredAmount <0){
       return;
     }
-    addTx(
-      titleController.text,
-      double.parse(amountController.text),
+    widget.addTx(
+      enteredData,
+      enteredAmount,
     );
+    Navigator.of(context).pop();  //after adding transaction close bottom sheet
   }
 
-  NewTransaction(this.addTx);
   @override
   Widget build(BuildContext context) {
     return Card(
