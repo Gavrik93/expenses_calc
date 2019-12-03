@@ -11,19 +11,20 @@ class ChartBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Text('\$ ${spendingAmount.toStringAsFixed(0)}'),
+        FittedBox(
+          child: Text('\$ ${spendingAmount.toStringAsFixed(0)}')), //Fixed amount value on chart top
         SizedBox(
           height: 5,
         ),
         Container(
-          height: 60,
+          height: 80,
           width: 20,
           child: Stack(
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.green, width: 1.0),
-                  color: Color.fromARGB(220, 220, 220, 1),
+                  border: Border.all(color: Colors.black, width: 1.0),
+                  color: Colors.grey,
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),

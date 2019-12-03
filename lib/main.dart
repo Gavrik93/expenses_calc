@@ -88,15 +88,20 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          titleText,
-        ),
-        actions: <Widget>[
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(
+              titleText,
+            ),
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () => _startAddNewTransaction(context),
           )
-        ],
+        
+          ],
+        ),
+        
       ),
       body: SingleChildScrollView(
         //reverse: true,
