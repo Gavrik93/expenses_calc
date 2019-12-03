@@ -26,7 +26,8 @@ class Chart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay).substring(0, 1),
         'amount': totalSum
       };
-    });
+      //simple solution to reverse Map, start shows first element(current) as last
+    }).reversed.toList();
   }
 
   double get totalSpending {
