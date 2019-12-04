@@ -18,7 +18,7 @@ class _NewTransactionState extends State<NewTransaction> {
 
   void _submitData() {
     if (_amountController.text.isEmpty || _titleController.text.isEmpty) {
-       _validateInput = true;
+      _validateInput = true;
     } else {
       _validateInput = false;
     }
@@ -65,9 +65,9 @@ class _NewTransactionState extends State<NewTransaction> {
               keyboardType: TextInputType.text,
               controller: _titleController,
               decoration: InputDecoration(
-                labelText: 'Title', 
-                errorText: _validateInput ? 'Title can\'t be empty' : null),
-              
+                  labelText: 'Title',
+                  errorText: _validateInput ? 'Title can\'t be empty' : null),
+
               onSubmitted: (_) => _submitData(),
               // onChanged: (value){
               //   titleInput = value;
@@ -77,8 +77,8 @@ class _NewTransactionState extends State<NewTransaction> {
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               //keyboardType: TextInputType.numberWithOptions(signed: true,),
               decoration: InputDecoration(
-                labelText: 'Amount',
-                errorText: _validateInput ? 'Amount can\'t be empty' : null),
+                  labelText: 'Amount',
+                  errorText: _validateInput ? 'Amount can\'t be empty' : null),
               controller: _amountController,
               onSubmitted: (_) => _submitData(),
               // onChanged: (value){
