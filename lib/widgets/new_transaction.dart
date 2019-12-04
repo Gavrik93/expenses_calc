@@ -14,10 +14,13 @@ class _NewTransactionState extends State<NewTransaction> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime _selectedDate;
+  bool _validateInput = false;
 
   void _submitData() {
     if (_amountController.text.isEmpty) {
-      return;
+       _validateInput = true;
+    } else {
+      _validateInput = false;
     }
     //extract data
     final enteredData = _titleController.text;
@@ -60,8 +63,11 @@ class _NewTransactionState extends State<NewTransaction> {
           children: <Widget>[
             TextField(
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(labelText: 'Title'),
               controller: _titleController,
+              decoration: InputDecoration(
+                labelText: 'Title', 
+                errorText: _validateInput ? 'Title can\'t be empty' : null),
+              
               onSubmitted: (_) => _submitData(),
               // onChanged: (value){
               //   titleInput = value;
@@ -70,7 +76,9 @@ class _NewTransactionState extends State<NewTransaction> {
             TextField(
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               //keyboardType: TextInputType.numberWithOptions(signed: true,),
-              decoration: InputDecoration(labelText: 'Amount'),
+              decoration: InputDecoration(
+                labelText: 'Amount',
+                errorText: _validateInput ? 'Amount can\'t be empty' : null),
               controller: _amountController,
               onSubmitted: (_) => _submitData(),
               // onChanged: (value){
