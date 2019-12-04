@@ -17,7 +17,7 @@ class _NewTransactionState extends State<NewTransaction> {
   bool _validateInput = false;
 
   void _submitData() {
-    if (_amountController.text.isEmpty) {
+    if (_amountController.text.isEmpty || _titleController.text.isEmpty) {
        _validateInput = true;
     } else {
       _validateInput = false;
