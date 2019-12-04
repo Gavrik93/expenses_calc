@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import './widgets/transaction_list.dart';
 import './widgets/new_transaction.dart';
 import './widgets/chart.dart';
 import './model/transaction.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitUp]);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -117,7 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Container(
               height: (MediaQuery.of(context).size.height -
-                      appBar.preferredSize.height - MediaQuery.of(context).padding.top) *
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top) *
                   0.3,
               child: Chart(
                 recentTransaction: _recentTransactions,
