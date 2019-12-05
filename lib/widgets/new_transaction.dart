@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import './adaptive_buttons.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function addTx;
@@ -55,7 +59,7 @@ class _NewTransactionState extends State<NewTransaction> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-          child: Card(
+      child: Card(
         elevation: 15,
         child: Container(
           padding: EdgeInsets.only(
@@ -84,7 +88,8 @@ class _NewTransactionState extends State<NewTransaction> {
                 //keyboardType: TextInputType.numberWithOptions(signed: true,),
                 decoration: InputDecoration(
                     labelText: 'Amount',
-                    errorText: _validateInput ? 'Amount can\'t be empty' : null),
+                    errorText:
+                        _validateInput ? 'Amount can\'t be empty' : null),
                 controller: _amountController,
                 onSubmitted: (_) => _submitData(),
                 // onChanged: (value){
@@ -99,14 +104,7 @@ class _NewTransactionState extends State<NewTransaction> {
                     Text(_selectedDate == null
                         ? 'No date chosen'
                         : 'Picked date: ${DateFormat.yMMMMd().format(_selectedDate)}'),
-                    FlatButton(
-                      textColor: Theme.of(context).primaryColor,
-                      child: Text(
-                        'Choose data',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      onPressed: _presentDatePicker,
-                    )
+                      AdaptiveButtons(textInButton: 'Choose date',handler: _presentDatePicker,),
                   ],
                 ),
               ),

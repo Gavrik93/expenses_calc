@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
               button: TextStyle(color: Colors.white)),
           appBarTheme: AppBarTheme(
               textTheme: ThemeData.light().textTheme.copyWith(
-                  title: TextStyle(fontFamily: 'OpenSans', fontSize: 25)))),
+                  title: TextStyle(fontFamily: 'OpenSans', fontSize: 25, color: Colors.white)))),
     );
   }
 }
@@ -106,7 +106,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final PreferredSizeWidget appBar = Platform.isIOS
         ? CupertinoNavigationBar(
-          middle: Text (titleText),
+          backgroundColor: Theme.of(context).primaryColor,
+          middle: Text (titleText, style: Theme.of(context).appBarTheme.textTheme.title,),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
