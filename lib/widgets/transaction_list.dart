@@ -11,8 +11,8 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  transaction.isEmpty
-          ? LayoutBuilder(builder: (ctx,constraints) {
+    return transaction.isEmpty
+        ? LayoutBuilder(builder: (ctx, constraints) {
             return Column(
               children: <Widget>[
                 Text(
@@ -31,42 +31,48 @@ class TransactionList extends StatelessWidget {
               ],
             );
           })
-          : ListView.builder(
-              itemBuilder: (contex, index) {
-                return Card(
-                  elevation: 5,
-                  margin: EdgeInsets.symmetric(
-                    vertical: 5,
-                    horizontal: 5,
-                  ),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 40,
-                      child: Padding(
-                        padding: EdgeInsets.all(6),
-                        child: FittedBox(
-                            child: Text('\$${transaction[index].amount}')),
-                      ),
-                    ),
-                    title: Text(transaction[index].title,
-                        style: Theme.of(context).textTheme.title),
-                    subtitle: Text(
-                      DateFormat.yMMMd().format(
-                        transaction[index].date,
-                      ),
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(
-                        Icons.delete_forever,
-                      ),
-                      color: Theme.of(context).errorColor,
-                      onPressed:()=> deleteTx(transaction[index].id),
+        : ListView.builder(
+            itemBuilder: (contex, index) {
+              return Card(
+                elevation: 5,
+                margin: EdgeInsets.symmetric(
+                  vertical: 5,
+                  horizontal: 5,
+                ),
+                child: ListTile(
+                  leading: CircleAvatar(
+                    radius: 40,
+                    child: Padding(
+                      padding: EdgeInsets.all(6),
+                      child: FittedBox(
+                          child: Text('\$${transaction[index].amount}')),
                     ),
                   ),
-                );
-              },
-              itemCount: transaction.length,
-            
-    );
+                  title: Text(transaction[index].title,
+                      style: Theme.of(context).textTheme.title),
+                  subtitle: Text(
+                    DateFormat.yMMMd().format(
+                      transaction[index].date,
+                    ),
+                  ),
+                  trailing: MediaQuery.of(context).size.width > 460
+                      ? FlatButton.icon(
+                          icon: Icon(Icons.delete),
+                          label: Text('Delete'),
+                          textColor: Theme.of(context).errorColor,
+                          onPressed: () => deleteTx(transaction[index].id),
+                        )
+                      : IconButton(
+                          icon: Icon(
+                            Icons.delete_forever,
+                          ),
+                          color: Theme.of(context).errorColor,
+                          onPressed: () => deleteTx(transaction[index].id),
+                        ),
+                ),
+              );
+            },
+            itemCount: transaction.length,
+          );
   }
 }

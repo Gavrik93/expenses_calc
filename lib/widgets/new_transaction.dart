@@ -54,63 +54,70 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 15,
-      child: Container(
-        padding: EdgeInsets.all(5),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            TextField(
-              keyboardType: TextInputType.text,
-              controller: _titleController,
-              decoration: InputDecoration(
-                  labelText: 'Title',
-                  errorText: _validateInput ? 'Title can\'t be empty' : null),
+    return SingleChildScrollView(
+          child: Card(
+        elevation: 15,
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              TextField(
+                keyboardType: TextInputType.text,
+                controller: _titleController,
+                decoration: InputDecoration(
+                    labelText: 'Title',
+                    errorText: _validateInput ? 'Title can\'t be empty' : null),
 
-              onSubmitted: (_) => _submitData(),
-              // onChanged: (value){
-              //   titleInput = value;
-              // },
-            ),
-            TextField(
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              //keyboardType: TextInputType.numberWithOptions(signed: true,),
-              decoration: InputDecoration(
-                  labelText: 'Amount',
-                  errorText: _validateInput ? 'Amount can\'t be empty' : null),
-              controller: _amountController,
-              onSubmitted: (_) => _submitData(),
-              // onChanged: (value){
-              //   amountInput = value;
-              // },
-            ),
-            Container(
-              height: 75,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(_selectedDate == null
-                      ? 'No date chosen'
-                      : 'Picked date: ${DateFormat.yMMMMd().format(_selectedDate)}'),
-                  FlatButton(
-                    textColor: Theme.of(context).primaryColor,
-                    child: Text(
-                      'Choose data',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    onPressed: _presentDatePicker,
-                  )
-                ],
+                onSubmitted: (_) => _submitData(),
+                // onChanged: (value){
+                //   titleInput = value;
+                // },
               ),
-            ),
-            RaisedButton(
-              color: Theme.of(context).primaryColor,
-              textColor: Theme.of(context).textTheme.button.color,
-              child: Text('Add Transaction'),
-              onPressed: _submitData,
-            ),
-          ],
+              TextField(
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                //keyboardType: TextInputType.numberWithOptions(signed: true,),
+                decoration: InputDecoration(
+                    labelText: 'Amount',
+                    errorText: _validateInput ? 'Amount can\'t be empty' : null),
+                controller: _amountController,
+                onSubmitted: (_) => _submitData(),
+                // onChanged: (value){
+                //   amountInput = value;
+                // },
+              ),
+              Container(
+                height: 75,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(_selectedDate == null
+                        ? 'No date chosen'
+                        : 'Picked date: ${DateFormat.yMMMMd().format(_selectedDate)}'),
+                    FlatButton(
+                      textColor: Theme.of(context).primaryColor,
+                      child: Text(
+                        'Choose data',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: _presentDatePicker,
+                    )
+                  ],
+                ),
+              ),
+              RaisedButton(
+                color: Theme.of(context).primaryColor,
+                textColor: Theme.of(context).textTheme.button.color,
+                child: Text('Add Transaction'),
+                onPressed: _submitData,
+              ),
+            ],
+          ),
         ),
       ),
     );
