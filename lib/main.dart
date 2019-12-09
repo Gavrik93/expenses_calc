@@ -32,7 +32,10 @@ class MyApp extends StatelessWidget {
               button: TextStyle(color: Colors.white)),
           appBarTheme: AppBarTheme(
               textTheme: ThemeData.light().textTheme.copyWith(
-                  title: TextStyle(fontFamily: 'OpenSans', fontSize: 25, color: Colors.white)))),
+                  title: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontSize: 25,
+                      color: Colors.white)))),
     );
   }
 }
@@ -82,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _startAddNewTransaction(BuildContext ctx) {
-    showModalBottomSheet(
+    showModalBottomSheet<void>(
         context: ctx,
         builder: (bCtx) {
           return GestureDetector(
@@ -106,17 +109,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final PreferredSizeWidget appBar = Platform.isIOS
         ? CupertinoNavigationBar(
-          backgroundColor: Theme.of(context).primaryColor,
-          middle: Text (titleText, style: Theme.of(context).appBarTheme.textTheme.title,),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-            
-            GestureDetector(
-              child: Icon(CupertinoIcons.add),
-              onTap: () => _startAddNewTransaction(context),)
-          ],),
-        )
+            backgroundColor: Theme.of(context).primaryColor,
+            middle: Text(
+              titleText,
+              style: Theme.of(context).appBarTheme.textTheme.title,
+            ),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                GestureDetector(
+                  child: Icon(CupertinoIcons.add),
+                  onTap: () => _startAddNewTransaction(context),
+                )
+              ],
+            ),
+          )
         : AppBar(
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -136,54 +143,59 @@ class _MyHomePageState extends State<MyHomePage> {
         height: (mediaQuery.size.height - appBar.preferredSize.height) * 0.7,
         child: TransactionList(_userTransaction, _deleteTransaction));
 
-    final pageBody = SafeArea(child: SingleChildScrollView(
-      //reverse: true,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          if (isLandscape)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('Show chart' , style: Theme.of(context).textTheme.title,),
-                Switch.adaptive(
-                  activeColor: Theme.of(context).accentColor,
-                  value: _showChart,
-                  onChanged: (val) {
-                    setState(() {
-                      _showChart = val;
-                    });
-                  },
-                )
-              ],
-            ),
-          if (!isLandscape)
-            Container(
-              height: (mediaQuery.size.height -
-                      appBar.preferredSize.height -
-                      mediaQuery.padding.top) *
-                  0.3,
-              child: Chart(
-                recentTransaction: _recentTransactions,
-              ),
-            ),
-          if (!isLandscape) txListWidget,
-          if (isLandscape)
-            _showChart
-                ? Container(
-                    height: (mediaQuery.size.height -
-                            appBar.preferredSize.height -
-                            mediaQuery.padding.top) *
-                        0.7,
-                    child: Chart(
-                      recentTransaction: _recentTransactions,
-                    ),
+    final pageBody = SafeArea(
+      child: SingleChildScrollView(
+        //reverse: true,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            if (isLandscape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Show chart',
+                    style: Theme.of(context).textTheme.title,
+                  ),
+                  Switch.adaptive(
+                    activeColor: Theme.of(context).accentColor,
+                    value: _showChart,
+                    onChanged: (val) {
+                      setState(() {
+                        _showChart = val;
+                      });
+                    },
                   )
-                : txListWidget,
-        ],
+                ],
+              ),
+            if (!isLandscape)
+              Container(
+                height: (mediaQuery.size.height -
+                        appBar.preferredSize.height -
+                        mediaQuery.padding.top) *
+                    0.3,
+                child: Chart(
+                  recentTransaction: _recentTransactions,
+                ),
+              ),
+            if (!isLandscape) txListWidget,
+            if (isLandscape)
+              _showChart
+                  ? Container(
+                      height: (mediaQuery.size.height -
+                              appBar.preferredSize.height -
+                              mediaQuery.padding.top) *
+                          0.7,
+                      child: Chart(
+                        recentTransaction: _recentTransactions,
+                      ),
+                    )
+                  : txListWidget,
+          ],
+        ),
       ),
-    ),);
+    );
     return Platform.isIOS
         ? CupertinoPageScaffold(
             child: pageBody,
