@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,17 +5,18 @@ import 'package:intl/intl.dart';
 import './adaptive_buttons.dart';
 
 class NewTransaction extends StatefulWidget {
+  const NewTransaction(this.addTx);
   final Function addTx;
 
-  NewTransaction(this.addTx);
+ 
 
   @override
   _NewTransactionState createState() => _NewTransactionState();
 }
 
 class _NewTransactionState extends State<NewTransaction> {
-  final _titleController = TextEditingController();
-  final _amountController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
   DateTime _selectedDate;
   bool _validateInput = false;
 
@@ -27,8 +27,8 @@ class _NewTransactionState extends State<NewTransaction> {
       _validateInput = false;
     }
     //extract data
-    final enteredData = _titleController.text;
-    final enteredAmount = double.parse(_amountController.text);
+    final String enteredData = _titleController.text;
+    final double enteredAmount = double.parse(_amountController.text);
     if (enteredData.isEmpty || enteredAmount < 0 || _selectedDate == null) {
       return;
     }
@@ -46,7 +46,7 @@ class _NewTransactionState extends State<NewTransaction> {
       initialDate: DateTime.now(),
       firstDate: DateTime(2019),
       lastDate: DateTime.now(),
-    ).then((pickDate) {
+    ).then((DateTime pickDate) {
       if (pickDate == null) {
         return;
       }

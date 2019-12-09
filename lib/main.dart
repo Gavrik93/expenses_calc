@@ -47,20 +47,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final String titleText = 'Expenses calculator';
-  final List<Trasaction> _userTransaction = [
-    // Trasaction(
-    //   id: 't1',
-    //   title: 'New shoes',
-    //   amount: 8.99,
-    //   date: DateTime.now(),
-    // ),
-    // Trasaction(
-    //   id: 't2',
-    //   title: 'Weekly Groceries',
-    //   amount: 28.99,
-    //   date: DateTime.now(),
-    // ),
-  ];
+  final List<Trasaction> _userTransaction = [];
   bool _showChart = false;
   List<Trasaction> get _recentTransactions {
     return _userTransaction.where((tx) {
@@ -72,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _addNewTransaction(
       String txTitle, double txAmount, DateTime choosenDate) {
-    final newTx = Trasaction(
+    final Trasaction newTx = Trasaction(
         title: txTitle,
         amount: txAmount,
         date: choosenDate,
@@ -87,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet<void>(
         context: ctx,
-        builder: (bCtx) {
+        builder: (BuildContext bCtx) {
           return GestureDetector(
               onTap: () {},
               behavior: HitTestBehavior.opaque,
@@ -103,9 +90,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
+    final MediaQueryData mediaQuery = MediaQuery.of(context);
     //In which orientation we are now
-    final isLandscape = mediaQuery.orientation == Orientation.landscape;
+    final bool isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     final PreferredSizeWidget appBar = Platform.isIOS
         ? CupertinoNavigationBar(
@@ -139,11 +126,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           );
 
-    final txListWidget = Container(
+    final Container txListWidget = Container(
         height: (mediaQuery.size.height - appBar.preferredSize.height) * 0.7,
         child: TransactionList(_userTransaction, _deleteTransaction));
 
-    final pageBody = SafeArea(
+    final SafeArea pageBody = SafeArea(
       child: SingleChildScrollView(
         //reverse: true,
         child: Column(

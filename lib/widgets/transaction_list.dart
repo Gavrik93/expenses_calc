@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 
 class TransactionList extends StatelessWidget {
 //recive List<Transaction> from user_transaction.dart
-  TransactionList(this.transaction, this.deleteTx);
+ const TransactionList(this.transaction, this.deleteTx);
   final List<Trasaction> transaction;
   final Function deleteTx;
 
   @override
   Widget build(BuildContext context) {
     return transaction.isEmpty
-        ? LayoutBuilder(builder: (ctx, constraints) {
+        ? LayoutBuilder(builder: (BuildContext ctx, BoxConstraints constraints) {
             return Column(
               children: <Widget>[
                 Text(
@@ -32,7 +32,7 @@ class TransactionList extends StatelessWidget {
             );
           })
         : ListView.builder(
-            itemBuilder: (contex, index) {
+            itemBuilder: (BuildContext contex, int index) {
               return Card(
                 elevation: 5,
                 margin: EdgeInsets.symmetric(
@@ -58,7 +58,7 @@ class TransactionList extends StatelessWidget {
                   trailing: MediaQuery.of(context).size.width > 460
                       ? FlatButton.icon(
                           icon: Icon(Icons.delete),
-                          label: Text('Delete'),
+                          label:const Text('Delete'),
                           textColor: Theme.of(context).errorColor,
                           onPressed: () => deleteTx(transaction[index].id),
                         )

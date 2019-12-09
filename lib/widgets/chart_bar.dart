@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ChartBar extends StatelessWidget {
-   ChartBar(this.label, this.spendingAmount, this.spendingPrcOfTotal);
+  const ChartBar(this.label, this.spendingAmount, this.spendingPrcOfTotal);
   final String label;
   final double spendingAmount;
   final double spendingPrcOfTotal;
@@ -11,7 +11,7 @@ class ChartBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (ctx, constraints) {
+      builder: (BuildContext ctx, BoxConstraints constraints) {
         return Column(
           children: <Widget>[
             Container(
