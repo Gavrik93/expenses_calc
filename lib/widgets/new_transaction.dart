@@ -1,24 +1,52 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import './adaptive_buttons.dart';
 
 class NewTransaction extends StatefulWidget {
-  const NewTransaction(this.addTx);
+   NewTransaction(this.addTx){
+    print('Constructor NewTransaction Widget');
+  }
   final Function addTx;
 
- 
-
   @override
-  _NewTransactionState createState() => _NewTransactionState();
+  _NewTransactionState createState() {
+    print('CreateState NewTransaction Widget');
+    return _NewTransactionState();}
 }
 
-class _NewTransactionState extends State<NewTransaction> {
+class _NewTransactionState extends State<NewTransaction>  {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
   DateTime _selectedDate;
   bool _validateInput = false;
+
+   _NewTransactionState () {
+     print('CreateState NewTransaction State');
+   }
+
+   @override
+  void initState() {
+    //for initial data
+    super.initState();
+    print('initState NewTransaction ');
+    
+  }
+
+  @override
+  void didUpdateWidget(NewTransaction oldWidget) {
+    //refetch data from parent
+    print('didUpdateWidget  ');
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    //cleaning up data, can gave you some memory leak, or fight with them
+    print('dispose  ');
+    super.dispose();
+  }
+
 
   void _submitData() {
     if (_amountController.text.isEmpty || _titleController.text.isEmpty) {
@@ -104,7 +132,10 @@ class _NewTransactionState extends State<NewTransaction> {
                     Text(_selectedDate == null
                         ? 'No date chosen'
                         : 'Picked date: ${DateFormat.yMMMMd().format(_selectedDate)}'),
-                      AdaptiveButtons(textInButton: 'Choose date',handler: _presentDatePicker,),
+                    AdaptiveButtons(
+                      textInButton: 'Choose date',
+                      handler: _presentDatePicker,
+                    ),
                   ],
                 ),
               ),
