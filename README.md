@@ -16,11 +16,4 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 
-## Updating this repo
-
-git add .
-
-git commit -m "WHAT I DO IN THIS COMMIT" 
-
-git push -u origin master  
 
